@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.2](https://github.com/k1LoW/github-script-php/compare/v0.1.1...v0.1.2) (2022-03-24)
+
+
 ## [v0.1.1](https://github.com/k1LoW/github-script-php/compare/v0.1.0...v0.1.1) (2022-03-24)
 
 
