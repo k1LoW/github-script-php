@@ -44,7 +44,7 @@ if (getenv('GITHUB_EVENT_PATH')) {
             $number = $context->payload->number;
         }
         if ($number) {
-            $context->issee = new stdClass();
+            $context->issue = new stdClass();
             $context->issue->number = $number;
             if ($context->repo) {
                 $context->issue->owner = $context->repo->owner;
