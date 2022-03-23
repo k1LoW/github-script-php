@@ -34,12 +34,13 @@ if (getenv('GITHUB_EVENT_PATH')) {
     }
 
     // issue
-    if ($context->payload) {
-        if ($context->payload->issue && $context->payload->issue->number) {
+    if (property_exists($context, 'payload')) {
+        $number = 0;
+        if (property_exists($context->payload, 'issue') && property_exists($context->payload->issue, 'number')) {
             $number = $context->payload->issue->number;
-        } else if ($context->payload->pull_request && $context->payload->pull_request->number) {
+        } else if (property_exists($context->payload, 'pull_request') && property_exists($context->payload->pull_request, 'number')) {
             $number = $context->payload->pull_request->number;
-        } else if ($context->payload->number) {
+        } else if (property_exists($context->payload, 'number')) {
             $number = $context->payload->number;
         }
         if ($number) {
