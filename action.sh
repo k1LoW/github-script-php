@@ -6,7 +6,7 @@ image=php:${INPUT_PHP_VERSION}
 
 echo "FROM ${image}" > ${github_action_path}/Dockerfile
 cat ${github_action_path}/_Dockerfile >> ${github_action_path}/Dockerfile
-docker build -t github-script-php -f ${github_action_path}/Dockerfile .
+docker build -q -t github-script-php -f ${github_action_path}/Dockerfile .
 
 rm -f ${github_action_path}/_script.php
 if [[ ! ${INPUT_SCRIPT} =~ ^\<\?php ]]; then
