@@ -1,0 +1,17 @@
+name: Example (Comment on an issue)
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: k1LoW/github-script-php@v0
+        with:
+          script: |
+            $owner = $context->repo->owner;
+            $repo = $context->repo->repo;
+            $number = $context->issue->number;
+            $comment = '👋 Thanks for reporting!';
+            $github->api('issue')->comments()->create($owner, $repo, $number, array('body' => $comment));
