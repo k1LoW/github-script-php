@@ -26,8 +26,6 @@ jobs:
         uses: ./
         with:
           script: |
-            var_dump(getenv("GITHUB_EVENT_PATH"));
-            var_dump($context);
             if ($context->payload->repository->default_branch !== 'main') {
                 exit(1);
             }
@@ -48,4 +46,4 @@ jobs:
         uses: ./
         with:
           script: |
-            var_dump($client->api('user')->repositories('k1LoW'));
+            var_dump($github->api('user')->repositories('k1LoW'));

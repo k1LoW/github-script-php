@@ -19,6 +19,7 @@ INPUT_SCRIPT="" # for docker: poorly formatted environment: variable '**' contai
 docker run --rm \
   --volume "${github_action_path}":/action \
 	--volume "${GITHUB_WORKSPACE}":/app \
+  --volume /home/runner/work:/home/runner/work \
 	--workdir /app \
 	--network host \
 	--env-file <( env | cut -f1 -d= ) \

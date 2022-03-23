@@ -1,5 +1,5 @@
 name: GitHub Script for PHP
-description: Run simple ruby scripts
+description: Run simple PHP scripts using the GitHub client
 branding:
   color: purple
   icon: code
