@@ -1,17 +1,20 @@
 #!/bin/bash
 set -e
 
-echo ${INPUT_SCRIPT}
-
 github_action_path=$(cd $(dirname $0); pwd)
 image=php:${INPUT_PHP_VERSION}
 
+echo "FROM ${image}" > Dockerfile
+cat _Dockerfile >> Dockerfile
+docker build -t github-script-php -f Dockerfile . 
+
 rm -f _script.php
+if [[ ! ${INPUT_SCRIPT} =~ ^\<\?php ]]; then
+    echo "<?php" >> _script.php
+fi
 echo ${INPUT_SCRIPT} >> _script.php
 
-if [[ ! ${INPUT_SCRIPT} =~ ^\<\?php ]]; then
-    sed -i '1s/^/<?php\n/' _script.php
-fi
+INPUT_SCRIPT="" # for docker: poorly formatted environment: variable '**' contains whitespaces.
 
 docker run --rm \
   --volume "${github_action_path}":/action \
@@ -19,4 +22,4 @@ docker run --rm \
 	--workdir /app \
 	--network host \
 	--env-file <( env | cut -f1 -d= ) \
-	${image} bash /action/entrypoint.sh
+	github-script-php bash /action/entrypoint.sh

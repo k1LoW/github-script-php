@@ -16,3 +16,36 @@ jobs:
         with:
           script: |
             echo "hello\n";
+
+  test-context:
+    name: 'Can get values from `$context`'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: context-payload
+        uses: ./
+        with:
+          script: |
+            var_dump(getenv("GITHUB_EVENT_PATH"));
+            var_dump($context);
+            if ($context->payload->repository->default_branch !== 'main') {
+                exit(1);
+            }
+      - id: context-job
+        uses: ./
+        with:
+          script: |
+            if ($context->job !== 'test-context') {
+                exit(1);
+            }
+
+  test-github:
+    name: 'Can call GitHub API using `$github`'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      -
+        uses: ./
+        with:
+          script: |
+            var_dump($client->api('user')->repositories('k1LoW'));
