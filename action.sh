@@ -4,15 +4,15 @@ set -e
 github_action_path=$(cd $(dirname $0); pwd)
 image=php:${INPUT_PHP_VERSION}
 
-echo "FROM ${image}" > Dockerfile
-cat _Dockerfile >> Dockerfile
-docker build -t github-script-php -f Dockerfile . 
+echo "FROM ${image}" > ${github_action_path}/Dockerfile
+cat ${github_action_path}/_Dockerfile >> ${github_action_path}/Dockerfile
+docker build -t github-script-php -f ${github_action_path}/Dockerfile .
 
-rm -f _script.php
+rm -f ${github_action_path}/_script.php
 if [[ ! ${INPUT_SCRIPT} =~ ^\<\?php ]]; then
-    echo "<?php" >> _script.php
+    echo "<?php" >> ${github_action_path}/_script.php
 fi
-echo ${INPUT_SCRIPT} >> _script.php
+echo ${INPUT_SCRIPT} >> ${github_action_path}/_script.php
 
 INPUT_SCRIPT="" # for docker: poorly formatted environment: variable '**' contains whitespaces.
 
