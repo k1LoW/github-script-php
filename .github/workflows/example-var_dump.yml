@@ -1,0 +1,15 @@
+name: Example (Print the available attributes of context)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  var-dump-context:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: k1LoW/github-script-php@v0
+        with:
+          script: |
+            var_dump($context);
