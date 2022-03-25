@@ -4,7 +4,7 @@ This action makes it easy to write PHP scripts in the workflow, just like [actio
 
 In order to use this action, a `script` input is provided. The value of that input should be the body of an function call. The following arguments will be provided:
 
-- `$github` A pre-authenticated [knplabs/github-api](https://github.com/knplabs/github-api) client
+- `$github` A pre-authenticated [knplabs/github-api](https://github.com/KnpLabs/php-github-api) client
 - `$context` An OpenStruct instance containing the context of the workflow run
 
 ## Examples

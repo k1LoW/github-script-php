@@ -13,3 +13,4 @@ jobs:
         with:
           script: |
             var_dump($context);
+            var_dump(json_decode(file_get_contents(getenv("GITHUB_EVENT_PATH"))));
